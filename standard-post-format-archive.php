@@ -24,14 +24,14 @@ function spfa_standard_posts( $query ) {
 add_action( 'pre_get_posts', 'spfa_standard_posts' );
 
 function spfa_standard_posts_archive_title( $title ) {
-  global $wp_query;
+	global $wp_query;
 
-  if (
-    is_tax() &&
-    array_key_exists( 'post_format', $wp_query->query ) &&
-    'post-format-standard' === $wp_query->query['post_format'] &&
-    'Archives' === $title
-  ) {
+	if (
+		is_tax() &&
+		array_key_exists( 'post_format', $wp_query->query ) &&
+		'post-format-standard' === $wp_query->query['post_format'] &&
+		__( 'Archives', 'spfa' ) === $title
+	) {
 		return __( 'Standard Posts', 'spfa' );
 	}
 
@@ -40,17 +40,17 @@ function spfa_standard_posts_archive_title( $title ) {
 add_filter( 'get_the_archive_title', 'spfa_standard_posts_archive_title' );
 
 function spfa_document_title( $title ) {
-  global $wp_query;
+	global $wp_query;
 
-  if (
-    is_tax() &&
-    array_key_exists( 'post_format', $wp_query->query ) &&
-    'post-format-standard' === $wp_query->query['post_format'] &&
-    empty( $title['title'] )
-  ) {
-    $title['title'] = __( 'Standard Posts', 'spfa' );
-  }
+	if (
+		is_tax() &&
+		array_key_exists( 'post_format', $wp_query->query ) &&
+		'post-format-standard' === $wp_query->query['post_format'] &&
+		empty( $title['title'] )
+	) {
+		$title['title'] = __( 'Standard Posts', 'spfa' );
+	}
 
-  return $title;
+	return $title;
 }
 add_filter( 'document_title_parts', 'spfa_document_title' );
